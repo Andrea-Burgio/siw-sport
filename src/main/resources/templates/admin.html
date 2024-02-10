@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin</title>
+
+    <link rel='stylesheet' href='/webjars/fortawesome__fontawesome-free/6.5.1/css/all.min.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/gridjs/dist/gridjs.production.min.js"></script>
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="text-bg-dark d-block d-sm-flex min-vh-100">
+
+    <!-- Sidebar on sm+ viewports -->
+    <nav class="sidebar d-none d-sm-flex flex-column bg-light">
+        <!-- Logo -->
+        <a href="/" class="logo"><img class="img-fluid" src="/images/icons/logo_large.png" alt="logo"></a>
+
+        <hr class="text-dark mt-3 mx-3 mb-4">
+
+        <!-- Nav buttons -->
+        <ul class="nav nav-stacked nav-pills flex-column flex-grow-1 text-nowrap fs-5 text-center">
+            <li class="nav-item my-3">
+                <a href="#AddTeam" class="addTeamButton nav-link link-dark fw-medium">
+                    <span class="d-none d-md-inline">Add Team</span>
+                    <i class="d-block d-md-none fa-solid fa-plus"></i>
+                </a>
+            </li>
+            <li class="nav-item my-3">
+                <a href="#EditTeam" class="editTeamButton nav-link link-dark fw-medium">
+                    <span class="d-none d-md-inline">Edit Team</span>
+                    <i class="d-block d-md-none fa-regular fa-pen-to-square"></i>
+                </a>
+            </li>
+        </ul>
+
+        <hr class="text-dark mt-3 mx-3 mb-4">
+
+        <!-- Logout button -->
+        <a href="/logout" class="btn btn-dark border-0 mb-3 mx-3 link-light">
+            <span class="d-none d-md-inline">Logout</span>
+            <i class="d-block d-md-none fa-solid fa-arrow-right-from-bracket"></i>
+        </a>
+    </nav>
+
+    <!-- Navbar on xs viewports -->
+    <ul class="nav d-sm-none text-bg-light d-flex nav-fill">
+        <li class="nav-item">
+            <a href="#AddTeam" class="addTeamButton nav-link link-dark fw-medium">
+                <span class="">Add Team</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#EditTeam" class="editTeamButton nav-link link-dark fw-medium">
+                <span class="">Edit Team</span>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Main-->
+    <main class="main d-flex mx-auto flex-column align-content-center">
+        <!-- Add team form -->
+        <div id="addTeam" class="d-none">
+            <h1 class="text-center mt-5 mb-5 mt-sm-6 mb-sm-6">Add team</h1>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl">
+                        <div class="mx-auto w-75 mb-5" id="presidentGrid"></div>
+                    </div>
+                    <div class="col-xl">
+                        <form action="/admin/addTeam" method="post" th:object="${teamPresidentDTO1}" class="addTeamForm w-75 mx-auto text-nowrap">
+                            <div class="mb-5">
+                                <label for="teamName1" class="form-label">Team name</label>
+                                <input id="teamName1" type="text" th:field="*{teamName}" class="form-control form-control-lg" name="teamName" placeholder="Teams name"/>
+                                <span th:replace="~{fragments::errorMessage('teamName')}"></span>
+                            </div>
+                            <div class="mb-5 w-50">
+                                <label for="foundationYear1" class="form-label">Foundation year</label>
+                                <input id="foundationYear1" type="number" th:field="*{foundationYear}" class="form-control form-control-lg" name="foundationYear" placeholder="Foundation year"/>
+                                <span th:replace="~{fragments::errorMessage('foundationYear')}"></span>
+                            </div>
+                            <div class="mb-5">
+                                <label for="officeAddress1" class="form-label">Office address</label>
+                                <input id="officeAddress1" type="text" th:field="*{officeAddress}" class="form-control form-control-lg" name="officeAddress" placeholder="Office address"/>
+                                <span th:replace="~{fragments::errorMessage('officeAddress')}"></span>
+                            </div>
+                            <div class="mb-5">
+                                <label for="president1" class="form-label">President</label>
+                                <input id="president1" type="text" th:field="*{president}" class="form-control form-control-lg" name="president" placeholder="President"/>
+                                <span th:replace="~{fragments::errorMessage('president')}"></span>
+
+                                <input id="presidentId" type="hidden" th:field="*{presidentId}" name="presidentId"/>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="d-block mx-auto btn btn-secondary">Submit</button>
+                                <div th:if="${successMessage}" class="alert alert-success" role="alert">
+                                    <p th:text="${successMessage}"></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit team form -->
+        <div id="editTeam" class="d-none">
+            <h1 class="text-center mt-5 mb-5 mt-sm-6 mb-sm-6">Edit team</h1>
+
+            <div class="w-75 mx-auto mb-5" id="teamsGrid"></div>
+
+            <form action="/admin/editTeam" method="post" th:object="${teamPresidentDTO2}" class="editTeamForm mx-auto text-nowrap">
+                <div class="mb-5">
+                    <label for="teamName2" class="form-label">Team name</label>
+                    <input id="teamName2" type="text" th:field="*{teamName}" class="form-control form-control-lg" name="name" placeholder="Team name"/>
+                    <span th:replace="~{fragments::errorMessage('teamName')}"></span>
+                </div>
+                <div class="mb-5 w-50" id="foundationYear">
+                    <label for="foundationYear2" class="form-label">Foundation year</label>
+                    <input id="foundationYear2" type="number" th:field="*{foundationYear}" class="form-control form-control-lg" name="foundationYear" placeholder="Foundation year"/>
+                    <span th:replace="~{fragments::errorMessage('foundationYear')}"></span>
+                </div>
+                <div class="mb-5">
+                    <label for="officeAddress2" class="form-label">Office address</label>
+                    <input id="officeAddress2" type="text" th:field="*{officeAddress}" class="form-control form-control-lg" name="officeAddress" placeholder="Office address"/>
+                    <span th:replace="~{fragments::errorMessage('officeAddress')}"></span>
+
+                    <input id="teamId2" type="hidden" th:field="*{teamId}" name="presidentId"/>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="d-block w-50 mx-auto btn btn-secondary">Submit</button>
+                    <div th:if="${successMessage}" class="alert alert-success" role="alert">
+                        <p th:text="${successMessage}"></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script th:inline="javascript">
+        let showForm = /*[[${showForm}]]*/ 'null';
+        if (showForm !== 'null') {
+            document.getElementById(showForm).classList.remove("d-none");
+        }
+    </script>
+    <script type="text/javascript" src="/js/admin/presidentsTable.js"></script>
+    <script type="text/javascript" src="/js/admin/teamsTable.js"></script>
+    <script type="text/javascript" src="/js/admin/navButtons.js"></script>
+</body>
+</html>

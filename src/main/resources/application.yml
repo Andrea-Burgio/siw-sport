@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/siwsport
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    defer-datasource-initialization: true
+
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      additional-paths: /static
+
+  thymeleaf:
+    cache: false
+
+  sql:
+    init:
+      mode: always
+

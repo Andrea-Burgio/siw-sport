@@ -1,0 +1,52 @@
+@import "bootstrap";
+@import "gridjsTables";
+
+$sidebar-width: clamp(110px, 15vw, 220px); /* the width should be 15vw, but never less than 100px and never more than 250px” */
+
+.logo {
+  margin: clamp(0.2px, 4vw, 40px);
+}
+
+.main{
+  width: calc(100% - #{$sidebar-width});
+}
+
+//sm breakpoint = 576px
+@media (max-width: 576px) {
+  .editTeamForm, .addTeamForm, .main, #foundationYear, #teamsGrid {
+    width: 90% !important;
+  }
+
+  .gridjs-search{
+    margin: 0 0 20px 0 !important;
+  }
+}
+
+//lg breakpoint = 992px
+@media (max-width: 992px) {
+  .editTeamForm, .addTeamForm, .main, #foundationYear, #teamsGrid {
+    width: 80% !important;
+  }
+
+  .gridjs-search{
+    margin: 0 0 20px 0 !important;
+  }
+}
+
+.editTeamForm{
+  width: 35%;
+}
+
+.sidebar{
+  width: $sidebar-width;
+}
+
+.nav-link:hover{
+  background-color: #d2d2dc;
+}
+
+.nav-link{
+  padding: 1rem 0 !important;
+}
+
+

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SIWFederation is a sports federation that connects the world of football one team at a time.">
+    <meta name="keywords" content="SIWFederation, football, sports, teams, players, presidents, federation">
+    <meta name="author" content="Andrea">
+    
+    <title>SIWF Homepage</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <link rel='stylesheet' href='/webjars/fortawesome__fontawesome-free/6.5.1/css/all.min.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+</head>
+
+<body class="text-bg-dark text-primary">
+    <!-- Navbar -->
+    <div th:replace="~{fragments::navbar_frag}"></div>
+
+
+    <!-- Header -->
+    <header class="header my-4 my-xl-6">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-2 offset-xl-1 order-xl-1 order-2">
+                    <img class="d-block float-end homepage_logo img-fluid mt-6" src="/images/icons/logo_large.png" alt="SIWFederation logo">
+                </div>
+
+                <div class="col-xl-4 offset-xl-0 order-xl-2 col-6 offset-3 order-1 mt-6 hero">
+<pre class="overflow-visible text-end">
+Connecting the
+world of <span class="text-secondary football fst-italic">Football</span>
+one team at a time
+</pre>
+                </div>
+
+                <div class="col-xl-5 d-xl-block order-xl-3 d-none order-3">
+                    <img class="player_image img-fluid align-self-end float-end" src="/images/pictures/hompage_player.png" alt="A football player">
+                </div>
+            </div>
+        </div>
+
+        <img class="homepage_polygons position-absolute top-0 start-0 img-fluid" src="/images/shapes/homepage_polygons.svg" alt="A background of blue and white polygons">
+        <img class="img-fluid line_divider" alt="A horizontal line divider" src="/images/shapes/homepage_line_divider.svg"/>
+    </header>
+
+
+    <!-- Main content -->
+    <main class="main my-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-5">
+                    <img class="img-fluid mx-auto d-block" src="/images/pictures/homepage_picture1.png" alt="A picture of a football field">
+                </div>
+                <div class="col-xl-6 offset-xl-1 mt-xl-0 mt-5">
+                    <p>
+                        Welcome to the SIWFederation, the home of American football enthusiasts. Established in 1986, the SIWFederation is a premier organization that brings together numerous teams from across the country. <br>
+                        Our mission is to foster a vibrant community where teams can compete, grow, and showcase their skills in the exciting world of American football. <br>
+                        At SIWFederation, we believe in the power of sports to connect people. We are committed to promoting American football and providing a platform where talent can thrive. Over the years, our teams have achieved remarkable success, setting records, winning championships, and inspiring countless fans.
+                    </p>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-xl-5 order-2 order-xl-1 mt-5 mt-xl-0">
+                    <p>
+                        “The SIWFederation is proud to have a presence across multiple states, fostering the growth and development of American football. The highlighted states on the map represent our reach and the locations of our registered teams. As we continue to grow, we aim to bring the spirit of American football to more regions.”
+                    </p>
+                </div>
+                <div class="col-xl-6 offset-xl-1 order-xl-2 order-1">
+                    <img class="img-fluid mt-xl-5 mb-xl-5" src="/images/pictures/homepage_map.svg" alt="A US map that shows where the SIWFederation is present">
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Footer -->
+    <div th:replace="~{fragments::footer_frag}"></div>
+
+
+    <!-- Modal -->
+    <div th:replace="~{fragments::memberModal_frag}"></div>
+
+
+    <!--This script is used to remove (or add) the <pre> tag when the viewport is under (or above) the xl breakpoint (1200px).-->
+    <script type="text/javascript" src="/js/index/removeAddPreElement.js"></script>
+
+    <script type="text/javascript" src="/js/index/showLoginModalError.js"></script>
+
+</body>
+</html>

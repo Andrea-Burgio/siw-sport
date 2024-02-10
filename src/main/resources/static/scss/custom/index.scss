@@ -1,0 +1,48 @@
+.footer_nav {
+  justify-content: end;
+}
+
+
+.line_divider {
+  margin-top: -4.5rem;
+}
+
+.hero, .hero > pre {
+  font-family: Poppins, sans-serif;
+  font-size: 3vw;
+}
+
+.player_image {
+  margin-right: -15px !important;
+}
+
+.homepage_polygons {
+  z-index: -1;
+}
+
+
+
+/* 1200px = xl breakpoint */
+@media (max-width: 1200px) {
+  .homepage_logo {
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 27vw !important;
+    margin-top: 1rem !important;
+  }
+
+  .hero {
+    font-size: 4vw !important;
+    text-align: center;
+    margin-top: 0 !important;
+  }
+
+  .line_divider {
+    margin-top: 0;
+  }
+
+  .homepage_polygons {
+    display: none !important;
+  }
+}

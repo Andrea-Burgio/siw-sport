@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/signup.css">
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="text-bg-dark">
+    <div th:replace="~{fragments::navbar_frag}"></div>
+
+    <header class="text-center">
+        <a href="/"><img class="logo mx-auto mt-5 mb-6" src="/images/icons/logo_large.png" alt="SIWFederation logo"></a>
+    </header>
+    <h1 class="text-center mb-4 mb-sm-5">Sign up</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xl">
+
+            <form action="/signup" method="post" class="addTeamForm w-75 mx-auto text-nowrap" th:object="${signupDataDTO}">
+                <div class="mb-5">
+
+                    <!-- Role -->
+                    <div>
+                        <div class="form-check mb-3">
+                            <label for="president" class="form-check-label">President</label>
+                            <input type="radio" name="role" class="form-check-input" th:field="*{role}" id="president"
+                                   value="ROLE_PRESIDENT"/>
+                        </div>
+                        <div class="form-check mb-3">
+                            <label for="administrator" class="form-check-label">Administrator</label>
+                            <input type="radio" name="role" class="form-check-input" th:field="*{role}"
+                                   id="administrator" value="ROLE_ADMINISTRATOR"/>
+                        </div>
+                        <span th:replace="~{fragments::errorMessage('role')}"></span>
+
+                    </div>
+
+
+
+                    <!-- Secret code -->
+                    <div>
+                        <label for="secretCode" class="form-label">Secret Code:</label>
+                        <input type="text" id="secretCode" th:field="*{secretCode}" class="form-control w-25" name="secretCode">
+                        <span th:replace="~{fragments::errorMessage('secretCode')}"></span>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+
+                    <!-- Username and password -->
+                    <div class="mb-5">
+                        <label for="username" class="form-label">Username</label>
+                        <input id="username" type="text" th:field="*{username}" class="form-control form-control-lg" name="username" placeholder="Username"/>
+                        <span th:replace="~{fragments::errorMessage('username')}"></span>
+                    </div>
+                    <div class="mb-5">
+                        <label for="password" class="form-label">Password</label>
+                        <input id="password" type="password" th:field="*{password}" class="form-control form-control-lg" name="password" placeholder="Password"/>
+                        <span th:replace="~{fragments::errorMessage('password')}"></span>
+
+                    </div>
+                </div>
+
+                <div id="presidentFields">
+                    <!-- First and last name -->
+                    <div class="mb-5">
+                        <label for="firstName" class="form-label">First name</label>
+                        <input id="firstName" th:field="*{firstName}" type="text" class="form-control form-control-lg" name="firstName" placeholder="First name"/>
+                        <span th:replace="~{fragments::errorMessage('firstName')}"></span>
+                    </div>
+                    <div class="mb-5">
+                        <label for="lastName" class="form-label">Last name</label>
+                        <input id="lastName" type="text" th:field="*{lastName}" class="form-control form-control-lg" name="lastName" placeholder="Last name"/>
+                        <span th:replace="~{fragments::errorMessage('lastName')}"></span>
+                    </div>
+
+
+                    <!-- Tax number -->
+                    <div class="mb-5">
+                        <label for="taxNumber" class="form-label">Tax Number</label>
+                        <input id="taxNumber" type="text" th:field="*{taxNumber}" class="form-control form-control-lg" name="taxNumber" placeholder="Tax Number"/>
+                        <span th:replace="~{fragments::errorMessage('taxNumber')}"></span>
+
+                    </div>
+
+                    <!-- Date and place of birth-->
+                    <div class="col-md-6 col-xl-3 mb-4">
+                        <label for="dateOfBirth">Date of birth</label>
+                        <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" name="birthDate" placeholder="Birth date" class="form-control form-control-lg">
+                        <span th:replace="~{fragments::errorMessage('dateOfBirth')}"></span>
+                    </div>
+                    <div class="mb-5">
+                        <label for="placeOfBirth" class="form-label">Place of birth</label>
+                        <input id="placeOfBirth" type="text" th:field="*{placeOfBirth}" class="form-control form-control-lg" name="placeOfBirth" placeholder="Birth place"/>
+                        <span th:replace="~{fragments::errorMessage('placeOfBirth')}"></span>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="mb-3">
+                    <button type="submit" class="d-block mx-auto btn btn-secondary">Submit</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        "use strict";
+
+        window.onload = function() {
+            let roleInputs = document.getElementsByName('role');
+            let presidentFields = document.getElementById('presidentFields');
+
+            for(let i = 0; i < roleInputs.length; i++) {
+                roleInputs[i].addEventListener("change", function() {
+                    if (this.value === 'ROLE_ADMINISTRATOR') {
+                        presidentFields.classList.add("d-none");
+                    } else {
+                        presidentFields.classList.remove("d-none");
+                    }
+                });
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<!-- Navbar fragment -->
+<nav th:fragment="navbar_frag" class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container">
+        <a href="/" class="navbar-brand fw-bolder"><img class="me-3 nav_logo" src="/images/icons/logo_mini.png" alt="" width="55">SIWFederation</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">	<span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto text-center">
+                <li class="nav-item">
+                    <a href="/players" class="nav-link fw-semibold">Players</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/teams" class="nav-link fw-semibold">Teams</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMINISTRATOR')" class="nav-item">
+                    <a href="/admin" class="nav-link fw-semibold">Admin</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_PRESIDENT')" class="nav-item">
+                    <a href="/president" class="nav-link fw-semibold">President</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!-- Footer fragment -->
+<footer th:fragment="footer_frag" class="bg-light py-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <a sec:authorize="!isAuthenticated()" class="btn btn-light h-100 text-nowrap" data-bs-toggle="modal" data-bs-target="#modal"><i class="fa-solid fa-user-circle fa-2x align-middle me-2"></i>Member login</a>
+                <div sec:authorize="isAuthenticated()" class="h-100 d-flex align-items-center">
+                    <i class="fa-solid fa-user-circle text-dark fa-2x align-middle me-2"></i><span sec:authentication="name" class="text-dark fw-semibold bg text-nowrap me-3"></span>
+                    <a href="/logout" class="btn btn-light h-100 text-nowrap">Logout</a>
+                </div>
+            </div>
+
+            <div class="col-8 d-none d-sm-inline">
+                <ul class="nav footer_nav">
+                    <li class="nav-item"><a href="#phone" class="nav-link"><img src="/images/icons/phone_icon.svg" alt="Phone icon"></a></li>
+                    <li class="nav-item"><a href="#mail" class="nav-link"><img src="/images/icons/mail_icon.svg" alt="Mail icon"></a></li>
+                    <li class="nav-item"><a href="#youtube" class="nav-link"><img src="/images/icons/youtube_icon.svg" alt="YouTube icon"></a></li>
+                    <li class="nav-item"><a href="#instagram" class="nav-link"><img src="/images/icons/instagram_icon.svg" alt="Instagram icon"></a></li>
+                    <li class="nav-item"><a href="#facebook" class="nav-link"><img src="/images/icons/facebook_icon.svg" alt="Facebook icon"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<div th:fragment="memberModal_frag" class="modal fade" id="modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-dark p-5">
+            <h1 class="h1 text-center mb-5">Login</h1>
+            <form class="mx-5" method="post" action="/login">
+                <div class="mb-4">
+                    <label for="username" class="form-label">Username</label>
+                    <input id="username" type="text" class="form-control form-control" name="username" placeholder="Username"/>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input id="password" type="password" class="form-control form-control" name="password" placeholder="Password"/>
+                </div>
+                <div class="mb-4 d-none" id="loginError">
+                    <span class="text-danger fw-semibold">Wrong username or password</span>
+                </div>
+                <div class="mb-3 d-flex justify-content-around">
+                    <a href="/signup" class="border-0 btn btn-primary bg-secondary">Sign up</a>
+                    <button type="submit" class="border-0 btn btn-primary bg-secondary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<span th:fragment="errorMessage(fieldName)"
+      th:if="${#fields.hasErrors(fieldName)}"
+      th:errors="*{__${fieldName}__}"
+      class="text-danger d-block">
+</span>
+
+
+
+
+</html>
+

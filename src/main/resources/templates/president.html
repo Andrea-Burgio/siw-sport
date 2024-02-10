@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>President</title>
+
+    <link rel='stylesheet' href='/webjars/fortawesome__fontawesome-free/6.5.1/css/all.min.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/president.css">
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="text-bg-dark d-block d-sm-flex min-vh-100">
+    <!-- Sidebar on sm+ viewports -->
+    <nav class="sidebar d-none d-sm-flex flex-column bg-light">
+        <!-- Logo -->
+        <a href="/" class="logo"><img class="img-fluid" src="/images/icons/logo_large.png" alt="logo"></a>
+
+        <hr class="text-dark mt-3 mx-3 mb-4">
+
+        <!-- Nav buttons -->
+        <ul class="nav nav-stacked nav-pills flex-column flex-grow-1 text-nowrap fs-5 text-center">
+            <li class="nav-item my-3">
+                <a href="#addPlayer" class="addPlayerButton nav-link link-dark fw-medium">
+                    <span class="d-none d-md-inline">Add Player</span>
+                    <i class="d-block d-md-none fa-solid fa-plus"></i>
+                </a>
+            </li>
+        </ul>
+
+        <hr class="text-dark mt-3 mx-3 mb-4">
+
+        <!-- Logout button -->
+        <a href="/logout" class="btn btn-dark border-0 mb-3 mx-3 link-light">
+            <span class="d-none d-md-inline">Logout</span>
+            <i class="d-block d-md-none fa-solid fa-arrow-right-from-bracket"></i>
+        </a>
+    </nav>
+
+    <!-- Navbar on xs viewports -->
+    <ul class="nav d-sm-none text-bg-light d-flex nav-fill">
+        <li class="nav-item">
+            <a href="#AddTeam" class="addPlayerButton nav-link link-dark fw-medium">
+                <span class="">Add Player</span>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Main-->
+    <main class="main d-flex mx-auto flex-column align-content-center">
+        <!-- Add player form -->
+        <div id="addPlayer" class="d-none">
+            <h1 class="text-center mt-5 mb-5 mt-sm-6 mb-sm-6">Add Player</h1>
+
+            <div class="container-fluid">
+                <form class="addTeamForm w-75 mx-auto text-nowrap">
+                    <div class="row g-3">
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Name" class="form-control form-control-lg">
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <label for="lastName">Last name</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Last name" class="form-control form-control-lg">
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <label for="birthDate">Birth date</label>
+                            <input type="date" id="birthDate" name="birthDate" placeholder="Birth date" class="form-control form-control-lg">
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <label for="birthPlace">Birth place</label>
+                            <input type="text" id="birthPlace" name="birthPlace" placeholder="Birth place" class="form-control form-control-lg">
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <label for="position0">Position</label>
+                            <select id="position0" class="form-select form-select-lg" name="position">
+                                <option th:each="position : ${positions}" th:value="${position}" th:text="${#strings.capitalize(position.name().toLowerCase().replace('_', ' '))}"></option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <label for="teams">Teams</label>
+                            <select id="teams" class="form-select form-select-lg" name="position">
+                                <option th:each="team : ${teams}" th:value="${team.getTeamId()}" th:text="${team.teamName}"></option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <label for="startDate0">Start date</label>
+                            <input type="date" id="startDate0" name="startDate0" class="form-control form-control-lg">
+                        </div>
+                        <div class="col-md-6 col-xl-3">
+                            <label for="endDate0">End date</label>
+                            <input type="date" id="endDate0" name="endDate0" class="form-control form-control-lg">
+                        </div>
+                    </div>
+
+                    <hr class="bg-light my-4">
+
+                    <h2 class="h2 mt-3 text-center">Previous teams</h2>
+                    <div id="dynamicInput">
+                    </div>
+                    <div class="row mt-5 mb-3">
+                        <div class="col-3 offset-3 text-center">
+                            <i class="d-inline-block fas fs-1 fa-plus-circle" onclick="addInput('dynamicInput');"></i>
+                            <i class="d-inline-block fas fs-1 fa-minus-circle" onclick="removeInput();"></i>
+                        </div>
+                        <div class="col-3 text-center">
+                            <button type="submit" class="mx-auto btn btn-secondary">Add player</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript" src="/js/president/navButtons.js"></script>
+    <script type="text/javascript" src="/js/president/addFormFields.js"></script>
+</body>
+</html>

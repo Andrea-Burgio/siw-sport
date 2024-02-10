@@ -1,0 +1,51 @@
+/* Variables for the color scheme*/
+$primary: #E2E2EC;
+$secondary: #FD7640;
+$light: #E2E2EC;
+$dark: #0C131A;
+$info: #e1e1e1;
+
+// Buttons
+$button-radius: 50px;
+$button-padding-x: 20px;
+$button-padding-y: 10px;
+$btn-border-radius: $button-radius;
+$btn-border-radius-sm: $button-radius;
+$btn-border-radius-lg: $button-radius;
+$btn-padding-x: $button-padding-x;
+$btn-padding-x-sm: $button-padding-x;
+$btn-padding-x-lg: $button-padding-x;
+$btn-padding-y: $button-padding-y;
+$btn-padding-y-sm: $button-padding-x;
+$btn-padding-y-lg: $button-padding-x;
+
+/* Variables for the font size and the font family */
+$font-family-sans-serif: 'Poppins', sans-serif;
+$font-size-base: 1.1rem;
+
+/* Forms */
+$form-check-input-checked-color: $secondary;
+$form-check-input-checked-border-color: $secondary;
+$form-check-input-checked-bg-color: $secondary;
+
+/* Variables for the navbar padding and hover color */
+$navbar-padding-y: 0.5rem;
+$navbar-light-hover-color: $secondary;
+
+/* Variables for the spacer and the spacers map */
+$spacer: 1rem !default;
+$spacers: (
+        0: 0,
+        1: $spacer * .25,
+        2: $spacer * .5,
+        3: $spacer,
+        4: $spacer * 1.5,
+        5: $spacer * 3,
+        6: $spacer * 6,
+        7: $spacer * 8,
+        8: $spacer * 12,
+) !default;
+
+
+/* Import the bootstrap styles */
+@import '../bootstrap/bootstrap';
